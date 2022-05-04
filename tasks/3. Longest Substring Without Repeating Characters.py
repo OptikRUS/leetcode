@@ -5,13 +5,11 @@ Given a string s, find the length of the longest substring without repeating cha
 
 class Solution:
     def lengthOfLongestSubstring(self, s: str) -> int:
-        long = 0
-        for i in range(len(s)):
-            count = ''
-            for j in range(i, len(s)):
-                if s[j] not  in count:
-                    count += s[j]
-                    long = max(long, len(count))
-                else:
-                    break
-        return long
+        i = lon = 0
+        hmap = {}
+        for j in range(0, len(s)):
+            if s[j] in hmap:
+                i = max(i, hmap[s[j]] + 1)
+            hmap[s[j]] = j
+            lon = max(lon, j-i+1)
+        return lon
