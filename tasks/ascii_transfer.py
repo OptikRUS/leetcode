@@ -5,14 +5,11 @@
 
 
 def ascii_convert(string: str):
-    count = 0
-    while True:
-        yield ord(string[count])
-        count += 1
+    for i in string:
+        yield ord(i)
 
 
 a = ascii_convert('какая-то строка')
-print(next(a))
 print(next(a))
 print(next(a))
 print(next(a))
