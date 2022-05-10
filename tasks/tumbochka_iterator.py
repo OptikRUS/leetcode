@@ -18,6 +18,9 @@ class Iterator:
         self.count = 0
 
     def to_custom(self, n):
+        max_index = len(self.iter_object) - 1
+        if n < 0 or n > max_index:
+            raise IndexError("max index %d but %d was given" % (max_index, n))
         self.count = n
 
     def __next__(self):
@@ -37,7 +40,9 @@ class Tumba:
         return self.items.append(item)
 
     def __iter__(self):
-        return Iterator(self.items)
+        iteration = Iterator(self.items)
+        iteration.to_custom(4)
+        return iteration
 
 
 tumbochka = Tumba()
