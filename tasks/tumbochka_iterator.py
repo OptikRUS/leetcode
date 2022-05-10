@@ -21,16 +21,12 @@ class Iterator:
         self.count = n
 
     def __next__(self):
-        # for element in self.iter_object:
-        #     print(element)
-        #     return self.iter_object[element]
         while True:
-            try:
+            if self.count < len(self.iter_object):
                 element = self.iter_object[self.count]
                 self.count += 1
                 return element
-            except IndexError:
-                raise StopIteration
+            raise StopIteration
 
 
 class Tumba:
