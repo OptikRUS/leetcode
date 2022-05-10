@@ -9,6 +9,23 @@ add_item, который на вход будет принимать произ�
 """
 
 
+class Iterator:
+    def __init__(self, iter_object):
+        self.iter_object = iter_object
+        self.count = 0
+
+    def to_start(self):
+        self.count = 0
+
+    def to_custom(self, n):
+        self.count = n
+
+    def __next__(self):
+        for element in range(self.count, len(self.iter_object)):
+            # print(element)
+            return self.iter_object[element]
+
+
 class Tumba:
     def __init__(self):
         self.items = []
@@ -17,7 +34,8 @@ class Tumba:
         return self.items.append(item)
 
     def __iter__(self):
-        return iter(self.items)
+        return Iterator(self.items)
+
 
 tumbochka = Tumba()
 tumbochka.add_item(1)
