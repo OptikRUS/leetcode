@@ -11,15 +11,17 @@ import time
 def cashe_with_timer(sec):
     def cashe(func):
         cash_dict = {}
-        start = time.perf_counter()
 
         def wrapper(*args, **kwargs):
-            if cash_dict.get('time', 0) > sec:
+            start = time.perf_counter()
+            result = cash_dict.setdefault(args, func(*args, **kwargs))
+            finish = time.perf_counter()
+            cash_dict['time'] = finish - start
+            if cash_dict['time'] > sec:
+                var = cash_dict['time']
                 cash_dict.clear()
-            else:
-                finish = time.perf_counter()
-                cash_dict['time'] = finish - start
-            return cash_dict.setdefault(args, func(*args, **kwargs))
+                cash_dict['time'] = var
+            return result
 
         return wrapper
     return cashe
