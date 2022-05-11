@@ -8,16 +8,24 @@
 import time
 
 
-def cashe(func):
-    cash_dict = {}
+def cashe_with_timer(sec):
+    def cashe(func):
+        cash_dict = {}
+        start = time.perf_counter()
 
-    def wrapper(*args, **kwargs):
-        return cash_dict.setdefault(args, func(*args, **kwargs))
+        def wrapper(*args, **kwargs):
+            if cash_dict.get('time', 0) > sec:
+                cash_dict.clear()
+            else:
+                finish = time.perf_counter()
+                cash_dict['time'] = finish - start
+            return cash_dict.setdefault(args, func(*args, **kwargs))
 
-    return wrapper
+        return wrapper
+    return cashe
 
 
-@cashe
+@cashe_with_timer(10)
 def division(a, b):
     return a / b
 
@@ -27,10 +35,3 @@ print(division(1, 4))
 print(division(1, 2))
 print(division(1, 4))
 print(division(1, 3))
-
-# start = time.perf_counter()
-# print(start)
-# time.sleep(2)
-# finish = time.perf_counter()
-# print(finish)
-# print(finish - start)
