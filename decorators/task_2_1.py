@@ -8,22 +8,23 @@
 """
 
 
-def test_func(func):
-    def wrapper(*args, **kwargs):
-        attempts = 10
-        while attempts != 0:
-            try:
-                return func(*args, **kwargs)
-            except Exception as error:
-                print(f"Error {error}")
-                attempts -= 1
-    return wrapper
+def test_func_custom(attempts):
+    def test_func(func):
+        def wrapper(*args, **kwargs):
+            count = attempts
+            while count != 0:
+                try:
+                    return func(*args, **kwargs)
+                except Exception as error:
+                    print(f"Error {error} attemts left {count}")
+                    count -= 1
+        return wrapper
+    return test_func
 
 
-@test_func
+@test_func_custom(5)
 def division(a, b):
     return a / b
 
 
-div = division(1, 0)
 print(division(1, 0))
