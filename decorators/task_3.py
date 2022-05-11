@@ -5,22 +5,19 @@
 очистки кэша в процессе выполнения функций.
 3.3 Параметризовать время кэширования в декораторе.
 """
+import time
 
 
-def cash(func):
+def cashe(func):
     cash_dict = {}
 
     def wrapper(*args, **kwargs):
-        if cash_dict.get(args):
-            return cash_dict[args]
-        else:
-            cash_dict[args] = func(*args, **kwargs)
-            return cash_dict[args]
+        return cash_dict.setdefault(args, func(*args, **kwargs))
 
     return wrapper
 
 
-@cash
+@cashe
 def division(a, b):
     return a / b
 
@@ -30,3 +27,10 @@ print(division(1, 4))
 print(division(1, 2))
 print(division(1, 4))
 print(division(1, 3))
+
+# start = time.perf_counter()
+# print(start)
+# time.sleep(2)
+# finish = time.perf_counter()
+# print(finish)
+# print(finish - start)
