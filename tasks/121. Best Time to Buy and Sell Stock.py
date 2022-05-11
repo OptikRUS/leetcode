@@ -19,9 +19,9 @@ Explanation: In this case, no transactions are done and the max profit = 0.
 
 class Solution:
     def max_profit(self, prices: list) -> int:
-            profit = 0
-            min_price = max(prices)
-            for i in range(len(prices)):
-                min_price = min(min_price, prices[i])
-                profit = max(profit, prices[i] - min_price)
-            return profit
+        profit = 0
+        min_price = max(prices)
+        for i in range(len(prices)):
+            min_price = min(min_price, prices[i])
+            profit = max(profit, prices[i] - min_price)
+        return profit
