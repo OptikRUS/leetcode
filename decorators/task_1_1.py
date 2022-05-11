@@ -6,14 +6,16 @@
 """
 
 
-def buy_cats(func):
-    def wrapper(*args, **kwargs):
-        print("Покупайте наших котиков!")
-        return func(*args, **kwargs)
-    return wrapper
+def get_slogan(slogan):
+    def buy_cats(func):
+        def wrapper(*args, **kwargs):
+            print(slogan)
+            return func(*args, **kwargs)
+        return wrapper
+    return buy_cats
 
 
-@buy_cats
+@get_slogan('Котики закончились, остались только собаки!')
 def division(a, b):
     return a / b
 
