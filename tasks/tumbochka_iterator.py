@@ -41,7 +41,7 @@ class Tumba:
 
     def __iter__(self):
         iteration = Iterator(self.items)
-        iteration.to_custom(4)
+        # iteration.to_custom()
         return iteration
 
 
