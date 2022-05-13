@@ -15,7 +15,7 @@ def get_point_3d(x, y, z):
     ('1', '0', 0, (1, 0.0, 0.0)),
     ('3.5', '0', 0, (3.5, 0.0, 0.0)),
 ])
-def test_get_point(x, y, z, result):
+def test_get_point_3d(x, y, z, result):
     point = get_point_3d(x, y, z)
     assert (point.x, point.y, point.z) == result
 
@@ -25,7 +25,7 @@ def test_get_point(x, y, z, result):
     (0, 0, 0, 'coord x: 0.0 coord y: 0.0 coord z: 0.0'),
     ('1.5', '1', 0, 'coord x: 1.5 coord y: 1.0 coord z: 0.0'),
 ])
-def test_get_point_str(x, y, z, result):
+def test_get_point_str_3d(x, y, z, result):
     point = get_point_3d(x, y, z)
     assert point.__str__() == result
 
@@ -41,11 +41,11 @@ def test_get_point_str(x, y, z, result):
     ({4}, 1, 0,  TypeError),
     (None, 1, 0, TypeError),
 ])
-def test_get_point_exceptions(x, y, z, result):
+def test_get_point_exceptions_3d(x, y, z, result):
     with pytest.raises(result):
         get_point_3d(x, y, z)
 
 
-def test_get_point_missing():
+def test_get_point_missing_3d():
     with pytest.raises(TypeError):
         get_point_3d()
