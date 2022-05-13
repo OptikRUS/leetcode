@@ -41,15 +41,4 @@ class Tumba:
 
     def __iter__(self):
         iteration = Iterator(self.items)
-        # iteration.to_custom()
         return iteration
-
-
-tumbochka = Tumba()
-tumbochka.add_item(1)
-tumbochka.add_item('item')
-tumbochka.add_item([1, 2, 3])
-tumbochka.add_item({3, 4, 5})
-
-for i in tumbochka:
-    print(i)
