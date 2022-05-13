@@ -54,8 +54,7 @@ def test_get_vector_exceptions(x, y, result):
     ((1, 2), (2, 3), 'coord x: 1.0 coord y: 1.0'),
 ])
 def test_get_vector_str(x, y, result):
-    vector = get_vector(x, y)
-    assert vector.__str__() == result
+    assert get_vector(x, y).__str__() == result
 
 
 def test_get_vector_missing():
@@ -75,9 +74,7 @@ def test_get_vector_missing():
     ((0, 0), get_point(4, 3), get_point(3, 4), (0, 0), -0.96),
 ])
 def test_vector_corner(x_1, y_1, x_2, y_2, result):
-    vector_1 = get_vector(x_1, y_1)
-    vector_2 = get_vector(x_2, y_2)
-    assert vector_1.corner(vector_2) == result
+    assert get_vector(x_1, y_1).corner(get_vector(x_2, y_2)) == result
 
 
 @pytest.mark.parametrize("x_1, y_1, x_2, y_2, x_3, y_3, result", [

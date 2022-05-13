@@ -37,13 +37,3 @@ class Vector(Point):
 
     def __sub__(self, other):
         return Vector(self.x - other.x, self.y - other.y)
-
-p1 = Point(1, 1)
-p2 = Point(2, 2)
-
-vector_1 = Vector(1, 1)
-vector_2 = Vector(0, 0)
-vector_3 = Vector((1, 1), (0, 0))
-v = vector_1.scalar_mul(vector_2)
-
-print(v)
