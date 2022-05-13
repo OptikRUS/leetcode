@@ -15,11 +15,11 @@ class Vector:
     def __str__(self):
         return f"coord x: {self.x}, coord y: {self.y}"
 
-    #
+    # сложение векторов
     def __add__(self, other):
         return self.x + other.x, self.y + other.y
 
-    # сложение векторов
+    # вычитание векторов
     def __sub__(self, other):
         return self.x - other.x, self.y - other.y
 
