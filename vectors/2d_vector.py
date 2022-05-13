@@ -24,7 +24,14 @@ class Vector(Point):
         self.y *= num
 
     def __add__(self, other):
-        return self.x + other.x, self.y + other.y
+        return Vector(self.x + other.x, self.y + other.y)
 
     def __sub__(self, other):
-        return self.x - other.x, self.y - other.y
+        return Vector(self.x - other.x, self.y - other.y)
+
+
+vector_1 = Vector(1, 2)
+vector_2 = Vector(1, 1)
+vector_3 = Vector(2, 2)
+# vector = vector_1 + vector_2
+print(vector_1 + vector_2 + vector_3)
