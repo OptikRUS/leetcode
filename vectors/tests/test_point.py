@@ -13,6 +13,7 @@ def get_point(x, y):
     (-1, -2, (-1.0, -2.0)),
     (1.5, 0, (1.5, 0.0)),
     ('1', '0', (1, 0.0)),
+    ('2.5', '0', (2.5, 0.0)),
 ])
 def test_get_point(x, y, result):
     point = get_point(x, y)
@@ -37,10 +38,10 @@ def test_get_point_str(x, y, result):
     ('один', -2, ValueError),
     ([], 0, TypeError),
     (1, (), TypeError),
-    (1, (1, ), TypeError),
-    ([3], (1, ), TypeError),
-    ({4}, (1, ), TypeError),
-    (None, (1, ), TypeError),
+    (1, (1,), TypeError),
+    ([3], 1, TypeError),
+    ({4}, 1, TypeError),
+    (None, 1, TypeError),
 ])
 def test_get_point_exceptions(x, y, result):
     with pytest.raises(result):
