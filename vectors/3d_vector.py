@@ -8,6 +8,10 @@ class Vector3D(Point3D):
             self.x = y[0] - x[0]
             self.y = y[1] - x[1]
             self.z = y[2] - x[2]
+        elif isinstance(x, Point3D) and isinstance(y, Point3D):
+            self.x = y.x - x.x
+            self.y = y.y - x.y
+            self.z = y.z - x.z
         else:
             super().__init__(x, y, z)
 
