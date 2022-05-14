@@ -19,4 +19,4 @@ class Point3D(Point):
             raise error
 
     def __str__(self):
-        return f"coord x: {self.x} coord y: {self.y} coord z: {self.z}"
+        return f"{super().__str__()} coord z: {self.z}"
