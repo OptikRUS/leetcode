@@ -1,6 +1,17 @@
 from vectors.point import Point3D
 
 
+def auth(password):
+    def deco(class_obj):
+        def wrapper(*args, **kwargs):
+            if password == 'password':
+                return class_obj(*args, **kwargs)
+            raise ValueError("Неверный пароль!")
+        return wrapper
+    return deco
+
+
+@auth('password')
 class Vector3D(Point3D):
 
     def __init__(self, x, y, z):
@@ -34,10 +45,3 @@ class Vector3D(Point3D):
 
     def __sub__(self, other):
         return Vector3D(self.x - other.x, self.y - other.y, self.z - other.z)
-
-
-p1 = Vector3D(1, 2, 3)
-p2 = Vector3D(4, 5, 6)
-p3 = Vector3D(1, 2, 3)
-
-print(p2.vector_mul(p3))
