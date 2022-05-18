@@ -1,5 +1,6 @@
 import psycopg2
 
+
 connect = psycopg2.connect(
     database="pdb",
     user="optikrus",
@@ -9,15 +10,19 @@ connect = psycopg2.connect(
 )
 
 
+def insert_user(username):
+    return f"""
+        INSERT INTO users ("name")
+        VALUES('{username}');
+        """
+
+
 def fill_table_users(name: str):
-    cursor = connect.cursor()
-    insert = cursor.execute
-    insert(f"""
-    INSERT INTO users ("name")
-    VALUES('{name}');
-    """)
-    connect.commit()
-    print("Database successfully add " + name)
+    with connect:
+        cursor = connect.cursor()
+        cursor.execute(insert_user(name))
+        return "Database successfully add " + name
 
 
-fill_table_users('user')
+for i in range(100):
+    fill_table_users(f'name{i}')
