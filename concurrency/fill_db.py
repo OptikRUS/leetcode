@@ -1,28 +1,38 @@
+import os
+from time import time
+
 import psycopg2
+
+username = os.getenv('USERNAME', None)
+password = os.getenv('PASSWORD', None)
 
 
 connect = psycopg2.connect(
     database="pdb",
-    user="optikrus",
-    password="password123456",
+    user=username,
+    password=password,
     host="127.0.0.1",
     port="5432"
 )
 
-
-def insert_user(username):
-    return f"""
-        INSERT INTO users ("name")
-        VALUES('{username}');
+QUERY = """
+        INSERT INTO users ("username", "lastname", "age")
+        VALUES('username', 'lastname', 18);
         """
 
 
-def fill_table_users(name: str):
+def fill_table_users():
     with connect:
         cursor = connect.cursor()
-        cursor.execute(insert_user(name))
-        return "Database successfully add " + name
+        cursor.execute(QUERY)
 
 
-for i in range(100):
-    fill_table_users(f'name{i}')
+def main():
+    for i in range(10):
+        fill_table_users()
+
+
+if __name__ == "__main__":
+    start = time()
+    main()
+    print(time() - start)
