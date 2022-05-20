@@ -40,3 +40,7 @@ if __name__ == "__main__":
     start = time()
     asyncio.run(main())
     print(time() - start)
+
+# 8.116582155227661
+# 8.281738996505737
+# 8.277981042861938

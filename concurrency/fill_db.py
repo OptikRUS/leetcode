@@ -28,7 +28,7 @@ def fill_table_users():
 
 
 def main():
-    for i in range(10):
+    for i in range(10000):
         fill_table_users()
 
 
@@ -36,3 +36,7 @@ if __name__ == "__main__":
     start = time()
     main()
     print(time() - start)
+
+# 16.386794090270996
+# 16.187684059143066
+# 16.108766078948975
