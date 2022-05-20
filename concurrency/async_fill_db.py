@@ -31,10 +31,9 @@ async def main():
     # )
     # connect = await asyncpg.connect("postgresql://optikrus:password123456@localhost:5432/pdb")
 
-    tasks = []
     for i in range(10000):
-        tasks.append(asyncio.create_task(fill_table_users(db_pool)))
-    await asyncio.gather(*tasks)
+        asyncio.ensure_future(coro_or_future=fill_table_users(db_pool))
+        # ensure_future
 
 
 if __name__ == "__main__":
