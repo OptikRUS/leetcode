@@ -7,33 +7,34 @@ import asyncpg
 username = os.getenv('USERNAME', None)
 password = os.getenv('PASSWORD', None)
 QUERY = """
-        INSERT INTO users ("username", "lastname", "age")
-        VALUES('username', 'lastname', 18);
+        INSERT INTO users 
+        VALUES($1, $2, $3);
         """
 
 
-async def fill_table_users(connect):
-    await connect.execute(QUERY)
-    # await db_pool.fetch(QUERY, 'username', 'lastname', 18)
-    # await connect.close()
+async def fill_table_users(db_pool):
+    await db_pool.fetch(QUERY, 'username', 'lastname', 18)
+    # async with connect.transaction():
+    #     await connect.execute(QUERY)
 
 
 async def main():
 
-    # db_pool = await asyncpg.create_pool(f"postgresql://{username}:{password}@localhost:5432/pdb")
+    db_pool = await asyncpg.create_pool(f"postgresql://{username}:{password}@localhost:5432/pdb")
 
-    # await asyncpg.connect(
+    # connect = await asyncpg.connect(
     #     database="pdb",
-    #     user="username",
-    #     password="password",
+    #     user=username,
+    #     password=password,
     #     host="127.0.0.1",
     #     port=5432
     # )
+    # connect = await asyncpg.connect("postgresql://optikrus:password123456@localhost:5432/pdb")
 
-    connect = await asyncpg.connect("postgresql://optikrus:password123456@localhost:5432/pdb")
-
+    tasks = []
     for i in range(10000):
-        await asyncio.create_task(fill_table_users(connect))
+        tasks.append(asyncio.create_task(fill_table_users(db_pool)))
+    await asyncio.gather(*tasks)
 
 
 if __name__ == "__main__":
@@ -41,6 +42,6 @@ if __name__ == "__main__":
     asyncio.run(main())
     print(time() - start)
 
-# 8.116582155227661
-# 8.281738996505737
-# 8.277981042861938
+# 3.4167120456695557
+# 3.0974180698394775
+# 3.292059898376465
