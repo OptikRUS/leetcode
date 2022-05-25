@@ -32,5 +32,9 @@ async def main():
         aws.append(get_uid())
     await asyncio.gather(*aws)
 
+    future_aws = []
+    for i in range(5):
+        future_aws.append(asyncio.ensure_future(get_uid()))
+    await asyncio.gather(*future_aws)
 
 asyncio.run(main())
